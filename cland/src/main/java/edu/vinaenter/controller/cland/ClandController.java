@@ -3,13 +3,14 @@ package edu.vinaenter.controller.cland;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,21 +42,6 @@ public class ClandController {
 	@Autowired
 	CatService catService;
 	
-//	@GetMapping({"", URLConstant.INDEX_PAGE })
-//	public String index(Model model, @PathVariable(required = false) Integer page, Lands lands) {
-//		if(page == null) {
-//			page =1;
-//		}
-//		int offset = PageUtil.getOffset(page);
-//		List<Category> catList = catService.getAll();
-//		List<Lands> landsList = landsService.getAll(offset, GlobalConstant.TOTAL_ROW);
-//		
-//		model.addAttribute("catList", catList);
-//		model.addAttribute("totalPage", PageUtil.getTotalPage(landsService.totalRow()));
-//		model.addAttribute("currentPage", page);
-//		model.addAttribute("landsList", landsList);
-//		return "cland.index";
-//	}
 	@GetMapping("cat/{cid}")
 	public String index(@PathVariable(value="cid") int cid, ModelMap model) {
 		
@@ -81,27 +67,49 @@ public class ClandController {
 			return "cland.index";
 		}
 		model.addAttribute("landsList", landsList);
+		model.addAttribute("totalPage", PageUtil.getTotalPage(landsService.totalRow()));
+		model.addAttribute("currentPage", page);
 		return "cland.index";
 	}
 	
 	@GetMapping("detail/{lid}")
-	public String detail(@PathVariable(value="lid") int lid, ModelMap model) {
-
+	public String detail(@PathVariable(value="lid") int lid,@PathVariable(required = false) Integer page, ModelMap model, HttpSession session) {
 		List<Category> catList = catService.getAll();
 		Lands lands =  landsService.findByid(lid);
+		List<Lands> landsList = landsService.getAllLimit(2);
+		model.addAttribute("landsList", landsList);
 		
+		String hasVisited = (String) session.getAttribute("hasVisited: " + lid);
+		if(hasVisited == null) {
+			session.setAttribute("hasVisited: " + lid, "yes");
+			session.setMaxInactiveInterval(3600); // thời gian reset session
+			landsService.counterView(lid);
+		}
 		model.addAttribute("catList", catList);
 		model.addAttribute("lands", lands);
 		return "cland.detail";
 	}
 	
 	@GetMapping("contact")
-	public String contact() {
+	public String contact(@PathVariable(required = false) Integer page,ModelMap model) {
+		List<Category> catList = catService.getAll();
+		List<Lands> landsList = landsService.getAllLimit(2);
+		model.addAttribute("landsList", landsList);
+		model.addAttribute("catList", catList);
 		return "cland.contact";
 	}
 	
 	@PostMapping("contact")
-	public String contact(@Valid @ModelAttribute("contact") Contact contact, RedirectAttributes ra) {
+	public String contact(@Valid @ModelAttribute("contact") Contact contact,BindingResult rs, RedirectAttributes ra
+			, ModelMap model,@PathVariable(required = false) Integer page) {
+		List<Lands> landsList = landsService.getAllLimit(2);
+		model.addAttribute("landsList", landsList);
+		List<Category> catList = catService.getAll();
+		model.addAttribute("catList", catList);
+		if (rs.hasErrors()) {
+			return "cland.contact";
+		}
+		
 		if(contactService.save(contact) > 0) {
 			ra.addFlashAttribute("msg",messageSource.getMessage("msg.success", null, Locale.getDefault()));
 			return "redirect:/contact";

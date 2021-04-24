@@ -2,12 +2,16 @@ package edu.vinaenter.model;
 
 import java.sql.Timestamp;
 
+import javax.validation.constraints.NotBlank;
+
 public class Lands {
 	
 	private int lid;
 	
+	@NotBlank
 	private String lname;
 	
+	@NotBlank
 	private String description;
 	
 	private Timestamp date_create;
@@ -15,7 +19,7 @@ public class Lands {
 	private String picture;
 	
 	private int area;
-	
+	@NotBlank
 	private String address;
 	
 	private int count_views;

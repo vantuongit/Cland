@@ -130,4 +130,30 @@ public class LandsDAO extends AbstractDAO<Lands> {
 			}
 		}, "%"+ search +"%");
 	}
+
+	public int counterView(int lid) {
+		final String SQL = "UPDATE lands SET count_views = count_views + 1 WHERE lid = ?";
+		return jdbcTemplate.update(SQL, lid);
+	}
+
+	public List<Lands> getAllLimit(int i) {
+		 String SQL = "SELECT l.*, c.cname  FROM lands AS l "
+					+ "INNER JOIN categories AS c ON l.c_id = cid ORDER BY count_views DESC LIMIT ?";
+		 return jdbcTemplate.query(SQL, new ResultSetExtractor<List<Lands>>() {
+				List<Lands> lands = new ArrayList<Lands>();
+				
+				@Override
+				public List<Lands> extractData(ResultSet rs) throws SQLException, DataAccessException {
+					
+					while (rs.next()) {
+						Lands land = new Lands(rs.getInt("lid"), rs.getString("lname"), rs.getString("description"),
+								rs.getTimestamp("date_create"), rs.getString("picture"), rs.getInt("area"),
+								rs.getString("address"), rs.getInt("count_views"),
+								new Category(rs.getInt("c_id"), rs.getString("cname")));
+						lands.add(land);
+					}
+					return lands;
+				}
+			}, i);
+	}
 }

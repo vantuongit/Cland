@@ -46,4 +46,10 @@ public class CatDAO extends AbstractDAO<Category> {
 			final String SQL = "SELECT COUNT(*) totalRow FROM categories";
 			return jdbcTemplate.queryForObject(SQL, Integer.class);
 		}
+		
+		public List<Category> findAllByNameOderByNewName(String search) {
+			final String SQL = "SELECT * FROM categories WHERE cname LIKE ?";
+
+			return jdbcTemplate.query(SQL,new BeanPropertyRowMapper<>(Category.class) ,"%"+search+"%");
+		}
 }

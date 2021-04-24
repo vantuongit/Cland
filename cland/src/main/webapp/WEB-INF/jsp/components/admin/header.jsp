@@ -23,7 +23,7 @@
 	                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account <b class="caret"></b></a>
 	                        <ul class="dropdown-menu animated fadeInUp">
 	                          <li><a href="profile.html">Profile</a></li>
-	                          <li><a href="login.html">Logout</a></li>
+	                          <li><a href="${pageContext.request.contextPath}/auth/logout">Logout</a></li>
 	                        </ul>
 	                      </li>
 	                    </ul>

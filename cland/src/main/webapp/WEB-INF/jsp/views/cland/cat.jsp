@@ -29,7 +29,7 @@
 		<c:if test="${totalPage > 1 and currentPage != ''}">
 			<div class="clearfix work_pagination">
 				<nav>
-					<a class="newer floatleft" href="${pageContext.request.contextPath}/cat/${currentPage-1}"> < -- Trang trước</a> <a
+					<a class="newer floatleft" href="${pageContext.request.contextPath}/cat/${currentPage-1}"> <-- Trang trước</a> <a
 						class="older floatright" href="${pageContext.request.contextPath}/cat/${currentPage+1}">Trang kế -- ></a>
 				</nav>
 			</div>

@@ -1,8 +1,9 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-
+<%@include file="/WEB-INF/jsp/components/taglib.jsp" %>
+<script	type="text/javascript" src="/WEB-INF/resources/admin/js/jquery-3.5.1.min.js"></script>
+<script	type="text/javascript" src="/WEB-INF/resources/admin/js/jquery.validate.min.js"></script>
 
 <div class="row">
 	<div class="col-md-12 panel-info">
@@ -20,7 +21,9 @@
 
 							<div class="form-group">
 								<label for="name">Tên danh mục</label> <input type="text"
-									class="form-control" placeholder="Nhập tên danh mục" name="cname">
+									class="form-control" placeholder="Nhập tên danh mục" name="cname"
+									value = '<c:if test="${not empty cat.cname }">${cat.cname }</c:if>'>
+									<form:errors path="cat.cname" cssStyle="color:red" cssClass="error" />
 							</div>
 						</div>
 					</div>

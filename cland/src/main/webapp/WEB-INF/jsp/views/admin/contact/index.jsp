@@ -19,10 +19,13 @@
 	<div class="row">
 		<div class="col-md-4">
 			<div class="input-group form">
-				<input type="text" class="form-control" placeholder="Search...">
+			<form action="${pageContext.request.contextPath}/admin/contact/index">
+				<input type="text" class="form-control" name = "search" 
+				value = '<c:if test="${not empty search }">${search }</c:if>'placeholder="Search...">
 				<span class="input-group-btn">
-					<button class="btn btn-primary" type="button">Search</button>
+				<input class="btn btn-primary" type="submit" value="Search" />
 				</span>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -67,19 +70,25 @@
 		</c:otherwise>
 	</c:choose>
 	<!-- Pagination -->
+	<c:if test="${totalPage > 1 and currentPage != ''}">
 	<nav class="text-center" aria-label="...">
-		<ul class="pagination">
-			<li class="disabled"><a href="#" aria-label="Previous"><span
-					aria-hidden="true">«</span></a></li>
-			<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">5</a></li>
-			<li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
-		</ul>
-	</nav>
+			<ul class="pagination">
+				<li class="disabled"><a
+					href="${pageContext.request.contextPath}/admin/contact/index/${currentPage-1}"
+					aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+				<c:forEach begin="1" end="${totalPage }" var="i">
+					<li class='<c:if test="${i == currentPage }" >active</c:if>'><a
+						href=" ${pageContext.request.contextPath}/admin/contact/index/${i}">${i}
+							<span class="sr-only">(current)</span>
+					</a></li>
+				</c:forEach>
+				<li><a
+					href="${pageContext.request.contextPath}/admin/contact/index/${currentPage+1}"
+					aria-label="Next"><span aria-hidden="true">»</span></a></li>
+			</ul>
+		</nav>
 	<!-- /.pagination -->
+	</c:if>
 
 </div>
 </div>

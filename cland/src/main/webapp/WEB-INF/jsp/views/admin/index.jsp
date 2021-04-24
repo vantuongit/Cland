@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@include file="/WEB-INF/jsp/components/taglib.jsp" %>   
-		  
+	pageEncoding="UTF-8"%>
+
+		  <div class="col-md-10">
 				<div class="row">
 		  		<div class="col-md-12 panel-warning">
 		  			<div class="content-box-header panel-heading">
@@ -16,7 +16,7 @@
 				                </span>
 				                    <div class="text-box">
 				                        <p class="main-text"><a class="fs-14" href="cat.html" title="">Quản lý danh mục</a></p>
-				                        <p class="text-muted">có 4 danh mục</p>
+				                        <p class="text-muted">Có ${totalCat } danh mục</p>
 				                    </div>
 				                </div>
 				            </div>
@@ -27,7 +27,7 @@
 				                </span>
 				                    <div class="text-box">
 				                        <p class="main-text"><a class="fs-14" href="news.html" title="">Quản lý tin</a></p>
-				                        <p class="text-muted">có 20 tin</p>
+				                        <p class="text-muted">Có ${totalLands } tin</p>
 				                    </div>
 				                </div>
 				            </div>
@@ -38,7 +38,7 @@
 				                </span>
 				                    <div class="text-box">
 				                        <p class="main-text"><a class="fs-14" href="" title="">Quản lý người dùng</a></p>
-				                        <p class="text-muted">Có 5 người dùng</p>
+				                        <p class="text-muted">Có ${totalUser } người dùng</p>
 				                    </div>
 				                </div>
 				            </div>
@@ -95,4 +95,7 @@
 		  			</div>
 		  		</div>
 		  	</div>
-		
+		  	
+		  </div><!-- /.col-md-10 -->
+		</div><!-- /.row -->
+    </div><!-- /.page-content -->

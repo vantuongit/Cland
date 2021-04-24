@@ -1,19 +1,26 @@
 package edu.vinaenter.model;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class Contact {
 
 	private int ct_id;
 	
-	
+	@Size(min = 5, max = 20)
+	@NotEmpty
 	private String ct_fullname;
 	
-	
+	@NotEmpty
+	@Email
 	private String ct_email;
 	
-	
+	@NotBlank
 	private String ct_subject;
 	
-	
+	@NotBlank
 	private String ct_content;
 
 	public int getCt_id() {

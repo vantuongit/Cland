@@ -36,19 +36,19 @@
 		Bất động sản liên quan <i class="fa fa-thumbs-o-up"></i>
 	</h2>
 	<div class="more_themes_container">
-		<div class="single_more_themes floatleft">
-			<img src="http://dummyimage.com/220x150/000/fff&text=Thumbnail"
-				alt="" /> <a href=""><h2>Magazine Wp Template</h2></a>
-		</div>
-		<div class="single_more_themes floatleft">
-			<img src="http://dummyimage.com/220x150/000/fff&text=Thumbnail"
-				alt="" /> <a href=""><h2>Magazine Wp Template</h2></a>
-		</div>
-		<div class="single_more_themes floatleft">
-			<img src="http://dummyimage.com/220x150/000/fff&text=Thumbnail"
-				alt="" /> <a href=""><h2>Magazine Wp Template</h2></a>
-		</div>
-
+	<c:choose>
+	<c:when test="${not empty lands }">
+		<c:forEach items="${landsList }" var="item">
+			<div class="single_more_themes floatleft" style="height: 300px">
+			<img  style='height: 200px; width: 150px' src="${pageContext.request.contextPath }/resources/files/${item.picture}"
+				alt="ảnh" /> <a href="${pageContext.request.contextPath}/detail/${item.lid}"><h2>${item.lname}</h2></a>
+		</div>	
+		</c:forEach>
+	</c:when>
+	<c:otherwise>
+		<p>Không có tin !</p>
+	</c:otherwise>
+	</c:choose>
 	</div>
 </div>
 

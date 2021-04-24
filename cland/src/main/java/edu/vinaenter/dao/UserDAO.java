@@ -105,4 +105,22 @@ public class UserDAO extends AbstractDAO<User>{
 		final String SQL = "SELECT COUNT(*) FROM users WHERE username = ?";
 		return jdbcTemplate.queryForObject(SQL, Boolean.class, username);
 	}
+	
+	public List<User> findAllByNameOderByNewName(String search) {
+	
+		final String SQL = "SELECT u.*,r.name FROM users AS u INNER JOIN role AS r ON u.role_id = r.id WHERE username LIKE ?";
+		return jdbcTemplate.query(SQL,new ResultSetExtractor<List<User>>(){
+			@Override
+			public List<User> extractData(ResultSet rs) throws SQLException,  
+            DataAccessException {  
+				 List<User> list=new ArrayList<User>();  
+				 while(rs.next()){  
+					 User e=new User(rs.getInt("u_id"),rs.getString("username"),rs.getString("fullname"),
+							 rs.getString("password"), new Role(rs.getString("name")));  
+					 list.add(e);  
+				 }  
+				        return list;  
+			}
+		}, "%" + search +"%");
+	}
 }

@@ -54,4 +54,8 @@ public class CatService implements ICRUDService<Category>{
 		return catDAO.totalRow();
 	}
 
+	public List<Category> findAllByNameOderByNewName(String search) {
+		return catDAO.findAllByNameOderByNewName(search);
+	}
+
 }

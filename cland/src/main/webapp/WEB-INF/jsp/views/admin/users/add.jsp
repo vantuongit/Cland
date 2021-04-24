@@ -20,13 +20,16 @@
 
 							<div class="form-group">
 								<label for="username">UserName</label> <input type="text"
-									class="form-control" placeholder="Nhập tên người dùng" name="username">
-									<form:errors path="user.username"></form:errors>
+									class="form-control" placeholder="Nhập tên người dùng" name="username"
+									value = '<c:if test="${not empty user.username }">${user.username }</c:if>'>
+									<form:errors path="user.username" cssStyle="color:red" cssClass="error"></form:errors>
 							</div>
 							<div class="form-group">
 								<label for="fullname">Fullname</label> <input type="text"
-									class="form-control" placeholder="Nhập tên" name="fullname">
+									class="form-control" placeholder="Nhập tên" name="fullname"
+									value = '<c:if test="${not empty user.fullname }">${user.fullname }</c:if>'>>
 									<form:errors path="user.fullname"></form:errors>
+									<form:errors path="user.fullname" cssStyle="color:red" cssClass="error"></form:errors>
 							</div>
 							<div class="form-group">
 								<label for="password">Password</label> <input type="password"
@@ -65,6 +68,6 @@
 		</div>
 	</div>
 </div>
-</div>
+
 <!-- /.row col-size -->
 

@@ -4,6 +4,8 @@ public class URLConstant {
 
 		public static final String URL_ADMIN_CAT = "admin/cat";
 		
+		public static final String URL_ADMIN = "admin";
+		
 		public static final String URL_ADMIN_NEWS = "admin/news";
 		
 		public static final String URL_ADMIN_USER = "admin/user";

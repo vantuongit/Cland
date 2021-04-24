@@ -34,7 +34,7 @@ public class AppConfig {
 //	    return new StandardServletMultipartResolver();
 //	}
 	@Bean
-	public MessageSource messageSource() { // đọc valid
+	public MessageSource messageSource() { // read valid
 		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
 		messageSource.setBasename("messages/messages");
 		messageSource.setDefaultEncoding("UTF-8");

@@ -49,13 +49,15 @@ public class ContactService implements ICRUDService<Contact> {
 
 	@Override
 	public List<Contact> getAll(int offset, int rowCount) {
-		// TODO Auto-generated method stub
-		return null;
+		return contactDAO.getAll(offset, rowCount);
 	}
 
 	@Override
 	public int totalRow() {
-		// TODO Auto-generated method stub
-		return 0;
+		return contactDAO.totalRow();
+	}
+
+	public List<Contact> findAllByNameOderByNewName(String search) {
+		return contactDAO.findAllByNameOderByNewName(search);
 	}
 }

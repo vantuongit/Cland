@@ -1,11 +1,15 @@
 package edu.vinaenter.model;
 
+import javax.validation.constraints.NotBlank;
+
 public class User {
 
 	private int u_id;
 	
+	@NotBlank
 	private String username;
 	
+	@NotBlank
 	private String fullname;
 	
 	private String password;

@@ -58,4 +58,8 @@ public class UserService implements ICRUDService<User> {
 		return userDAO.totalRow();
 	}
 
+	public List<User> findAllByNameOderByNewName(String search) {
+		return userDAO.findAllByNameOderByNewName(search);
+	}
+
 }

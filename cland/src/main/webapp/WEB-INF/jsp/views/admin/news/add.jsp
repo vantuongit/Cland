@@ -18,7 +18,9 @@
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label for="lname">Thêm tin</label> <input type="text"
-									name="lname" class="form-control" placeholder="Nhập tên tin">
+									name="lname" class="form-control" placeholder="Nhập tên tin"
+									value = '<c:if test="${not empty lands.lname }">${lands.lname }</c:if>'>
+									<form:errors path="lands.lname" cssStyle="color:red" cssClass="error"></form:errors>
 							</div>
 
 							<div class="form-group">
@@ -47,15 +49,19 @@
 
 							<div class="form-group">
 								<label>Mô tả</label>
-								<textarea class="form-control" rows="3" name = "description"></textarea>
+								<textarea class="form-control" rows="3" name = "description"><c:if test="${not empty lands.description }">${lands.description }</c:if></textarea>
+								<form:errors path="lands.description" cssStyle="color:red" cssClass="error"></form:errors>
 							</div>
 							<div class="form-group">
 								<label for="address">Địa chỉ</label> <input type="text"
-									name="address" class="form-control" placeholder="Nhập địa chỉ">
+									name="address" class="form-control" placeholder="Nhập địa chỉ"
+									value="<c:if test="${not empty lands.address }">${lands.address }</c:if>">
+									<form:errors path="lands.address" cssStyle="color:red" cssClass="error"></form:errors>
 							</div>
 							<div class="form-group">
 								<label for=area>Diện tích</label> <input type="text"
-									name="area" class="form-control" placeholder="Nhập diện tích">
+									name="area" class="form-control" placeholder="Nhập diện tích"
+									value = "<c:if test="${not empty lands.area }">${lands.area}</c:if>">
 							</div>
 						</div>
 

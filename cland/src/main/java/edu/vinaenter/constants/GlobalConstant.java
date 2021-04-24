@@ -8,5 +8,5 @@ public class GlobalConstant {
 	
 	public static final String ENV_PATH_PROJECT = "PATH_PROJECT";
 	
-	public static final Integer TOTAL_ROW = 4;  //số tin trên 1 trang
+	public static final Integer TOTAL_ROW = 3;  //số tin trên 1 trang
 }

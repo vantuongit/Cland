@@ -66,5 +66,12 @@ public class LandsService implements ICRUDService<Lands> {
 	public List<Lands> findAllByNameOderByNewName(String search) {
 		return landsDAO.findAllByNameOderByNewName(search);
 	}
+	public int counterView(int lid) {
+		return landsDAO.counterView(lid);
+		
+	}
+	public List<Lands> getAllLimit(int i) {
+		return landsDAO.getAllLimit(i);
+	}
 	
 }

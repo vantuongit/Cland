@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,7 +34,8 @@ public class AdminCategoryController {
 	private CatService catService;
 
 	@GetMapping({URLConstant.INDEX, URLConstant.INDEX_PAGE })
-	public String index(ModelMap model,@PathVariable(required = false) Integer page, Category category) {
+	public String index(@ModelAttribute("search") String search,ModelMap model,
+			@PathVariable(required = false) Integer page, Category category) {
 		if(page == null) {
 			page =1;
 		}
@@ -41,7 +43,13 @@ public class AdminCategoryController {
 		
 		//List<Category> catList = catService.getAll();
 		List<Category> catList = catService.getAll(offset, GlobalConstant.TOTAL_ROW);
+		List<Category> catListSearch = catService.findAllByNameOderByNewName(search);
 		model.addAttribute("totalPage", PageUtil.getTotalPage(catService.totalRow()));
+		if (!"".equals(search)) {
+
+			model.addAttribute("catList", catListSearch);
+			return "admin.cat.index";
+		}
 		model.addAttribute("currentPage", page);
 		model.addAttribute("catList",catList);
 		return "admin.cat.index";
@@ -59,7 +67,8 @@ public class AdminCategoryController {
 		return "admin.cat.edit"; 
 	}
 	@PostMapping(URLConstant.EDIT+"/{cid}")
-	public String edit(@Valid @ModelAttribute("cat") Category cat, RedirectAttributes rd) {
+	public String edit(@Valid @ModelAttribute("cat") Category cat,BindingResult rs, RedirectAttributes rd) {
+		
 		if(catService.update(cat) >0) {
 			rd.addFlashAttribute("msg",messageSource.getMessage("msg.success", null, Locale.getDefault()));
 			return "redirect:/admin/cat/index";
@@ -80,7 +89,10 @@ public class AdminCategoryController {
 	}
 
 	@PostMapping(URLConstant.ADD)
-	public String cat(@ModelAttribute("cat") Category cat, RedirectAttributes rd) {
+	public String cat(@Valid @ModelAttribute("cat") Category cat,BindingResult rs, RedirectAttributes rd) {
+		if(rs.hasErrors()) {
+			return "admin.cat.add";
+		}
 		if(catService.save(cat) >0) {
 			rd.addFlashAttribute("msg",messageSource.getMessage("msg.success", null, Locale.getDefault()));
 			return "redirect:/admin/cat/index";

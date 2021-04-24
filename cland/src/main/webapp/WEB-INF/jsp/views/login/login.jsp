@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<c:url value="/resources/admin" var="contextPathAdmin"
-	scope="application" />
+
 <html>
 
 <div class="row">

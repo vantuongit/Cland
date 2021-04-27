@@ -35,7 +35,7 @@
 								</c:when>
 							</c:choose>
 						</ul></li>
-					<li><a href="${pageContext.request.contextPath}/detail">Giới
+					<li><a href="${pageContext.request.contextPath}/about">Giới
 							thiệu</a></li>
 					<li><a href="${pageContext.request.contextPath}/contact">Liên
 							hệ</a></li>

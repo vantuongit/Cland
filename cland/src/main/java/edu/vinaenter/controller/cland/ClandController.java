@@ -119,6 +119,13 @@ public class ClandController {
 		}
 	}
 	
-	//search
+	@GetMapping("about")
+	public String index( ModelMap model) {
+		List<Category> catList = catService.getAll();
+		model.addAttribute("catList", catList);
+		List<Lands> landsList = landsService.getAllLimit(2);
+		model.addAttribute("landsList", landsList);
+		return "cland.about";
+	}
 	
 }

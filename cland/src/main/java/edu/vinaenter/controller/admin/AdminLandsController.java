@@ -77,6 +77,7 @@ public class AdminLandsController {
 			@RequestParam("file") MultipartFile file, HttpServletRequest request, ModelMap modelMap) {
 		String fileName = FileUtil.upload(file, request);
 		lands.setPicture(fileName);
+		
 		if(rs.hasErrors()) {
 			modelMap.addAttribute("cat", catService.getAll());
 			return "admin.news.add";

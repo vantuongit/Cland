@@ -24,4 +24,7 @@
   <definition name="cland.detail" extends="cland.template">
     <put-attribute name="content" value="/WEB-INF/jsp/views/cland/single.jsp" />
   </definition>
+  <definition name="cland.about" extends="cland.template">
+    <put-attribute name="content" value="/WEB-INF/jsp/views/cland/about.jsp" />
+  </definition>
 </tiles-definitions>
